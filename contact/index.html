@@ -11,6 +11,21 @@
   </head>
 
   <body>
+    <header>
+      <div class="container">
+        <div class="logo"><a href="../" aria-label="Go to the frontpage"><img src="/images/hope-down-under.svg" alt="Hope Down Under logo"></a></div>
+        <input type="checkbox" id="burgermenu" />
+        <label for="burgermenu"><img src="/images/menu.svg" alt="Open menu"></label>
+        <nav class="navbar">
+          <ul>
+            <li><a href="/blog/">Blog</a></li>
+            <li><a href="/about/">About</a></li>
+            <li><a href="/contact/">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <div class="container">
     <form id="contact">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required><br><br>
@@ -27,5 +42,6 @@
         <input type="submit" value="Submit">
       </form>
       <script src="../js/contact.js"></script>
+    </div>
   </body>
 </html>
