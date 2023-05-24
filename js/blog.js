@@ -20,7 +20,7 @@ function renderPosts(posts) {
 
     const postLink = document.createElement("a");
     postLink.classList.add("link");
-    postLink.href = `/blog/?id=${post.id}`;
+    postLink.href = `/blog/post.html?id=${post.id}`;
 
     const postImage = document.createElement("img");
     postImage.classList.add("image");
