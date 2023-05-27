@@ -577,10 +577,29 @@ nav a:hover {
 .post .content {
     background: #fff;
     max-width: 768px;
+    min-width: 128px;
     border-radius: 1rem;
     padding: 2rem 3rem 1.5rem 3rem;
     margin: auto;
     position: relative;
+}
+
+@media (max-width: 480px) {
+    .container.post {
+        padding: 2rem;
+    }
+    .post img {
+        margin-bottom: 1rem;
+    }
+    .post .content {
+        background: #fff;
+        max-width: 768px;
+        min-width: 128px;
+        border-radius: 1rem;
+        padding: 1.5rem 2rem .5rem 2rem;
+        margin: auto;
+        position: relative;
+    }
 }
 
 /* image modal */
@@ -593,9 +612,9 @@ nav a:hover {
     height: 100%;
     background-color: rgba(2, 64, 89, 0.8);
     z-index: 999;
-  }
+}
   
-  .modal {
+.modal {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -603,16 +622,16 @@ nav a:hover {
     background-color: #FAF2E0;
     width: 100%;
     max-width: 980px;
-    padding: 2rem;
+    padding: 2rem 2rem 1.5rem 2rem;
     z-index: 1000;
     border-radius: 1rem;
-  }
-  
-  .modal-content {
+}
+ 
+.modal-content {
     text-align: center;
-  }
+}
   
-  .modal-close {
+.modal-close {
     position: absolute;
     top: -1rem;
     right: -1rem;
@@ -623,13 +642,66 @@ nav a:hover {
     width: 2.5rem;
     height: 2.5rem;
     cursor: pointer;
-  }
+}
   
-  .modal-image {
+.modal-image {
     max-width: 100%;
     height: auto;
+    margin: 0;
+    padding: 0;
     border-radius: .5rem;
-  }  
+}
+
+@media (max-width: 480px) {
+    .modal {
+        width: 80%;
+        padding: 1rem 1rem .5rem 1rem;
+    }    
+}
+
+/* about */
+
+.bio {
+    max-width: 768px;
+    min-width: 128px;
+    margin: 0 auto 4rem auto;
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+.portrait {
+    width: auto;
+    float: right;
+    margin: 0 0 2rem 2rem;
+}
+
+.portrait img {
+    max-width: 288px;
+    width: auto;
+    height: auto;
+    border-radius: 50%;
+}
+
+.intro {
+    font-size: 120%;
+}
+
+@media (max-width: 768px) {
+    .portrait {
+        width: 100%;
+        height: auto;
+        margin: 0 0 1rem 0;
+    }
+    .portrait img {
+        max-width: 256px;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        display: block;
+        margin: auto;
+    }
+}
 
 /* contact */
 
