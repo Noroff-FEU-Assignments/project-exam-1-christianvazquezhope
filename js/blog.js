@@ -1,19 +1,18 @@
 const api = "https://dev.digithings.io/wp-api/wp-json/wp/v2/posts";
-const params = new URLSearchParams({
-  categories: "17",
-  per_page: 10,
-  _embed: true
-});
+let perPage = 10;
 
-const postContainer = document.querySelector(".container.blog");
+const postContainer = document.querySelector(".blog");
 const loadingIndicator = document.createElement("div");
 loadingIndicator.classList.add("loading");
 loadingIndicator.textContent = "Loading posts...";
 postContainer.appendChild(loadingIndicator);
 
+const btnContainer = document.createElement("div");
+btnContainer.classList.add("btn-container");
+
 function renderPosts(posts) {
   postContainer.innerHTML = '';
-  
+
   posts.forEach(post => {
     const postWrapper = document.createElement("div");
     postWrapper.classList.add("item");
@@ -37,17 +36,31 @@ function renderPosts(posts) {
     postContainer.appendChild(postWrapper);
   });
 
-  const moreButton = document.createElement("button");
-  moreButton.classList.add("more-btn");
-  moreButton.textContent = "Load more posts";
-  moreButton.addEventListener("click", () => {
-    params.set('page', parseInt(params.get('page')) + 1);
-    fetchPosts(params);
+  const moreBtn = document.createElement("button");
+  moreBtn.textContent = "Load more posts";
+  moreBtn.addEventListener("click", () => {
+    perPage += 10;
+    fetchPosts();
+    moreBtn.removeEventListener("click", loadMorePosts);
   });
-  postContainer.appendChild(moreButton);
+
+  const loadMorePosts = () => {
+    moreBtn.addEventListener("click", loadMorePosts);
+    perPage += 10;
+    fetchPosts();
+  };
+
+  btnContainer.appendChild(moreBtn);
+  postContainer.appendChild(btnContainer);
 }
 
-function fetchPosts(params) {
+function fetchPosts() {
+  const params = new URLSearchParams({
+    categories: "17",
+    per_page: perPage,
+    _embed: true
+  });
+
   fetch(`${api}?${params.toString()}`)
     .then(response => {
       if (response.ok) {
@@ -66,4 +79,4 @@ function fetchPosts(params) {
     });
 }
 
-fetchPosts(params);
+fetchPosts();

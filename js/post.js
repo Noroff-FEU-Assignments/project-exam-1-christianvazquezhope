@@ -4,39 +4,50 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 const postId = urlParams.get('id');
 
-const postContainer = document.querySelector(".container.blogpost");
+const postContainer = document.querySelector(".container.post");
 const loadingIndicator = document.createElement("div");
 loadingIndicator.classList.add("loading");
 loadingIndicator.textContent = "Loading post...";
 postContainer.appendChild(loadingIndicator);
 
+let currentPost = null;
+
 function renderPost(post) {
+  currentPost = post;
+
   postContainer.innerHTML = '';
 
-  const blogpostWrapper = document.createElement("div");
-  blogpostWrapper.classList.add("post");
+  const blogpostContent = document.createElement("div");
+  blogpostContent.classList.add("post-content");
 
   const postImage = document.createElement("img");
   postImage.classList.add("featured-image");
   postImage.src = post._embedded["wp:featuredmedia"][0].source_url;
   postImage.alt = post.title.rendered;
   postImage.addEventListener("click", openModal);
-  blogpostWrapper.appendChild(postImage);
-
-  const postTitle = document.createElement("h1");
-  postTitle.classList.add("title");
-  postTitle.textContent = post.title.rendered;
-  blogpostWrapper.appendChild(postTitle);
+  blogpostContent.appendChild(postImage);
 
   const postContent = document.createElement("div");
   postContent.classList.add("content");
-  postContent.innerHTML = post.content.rendered;
-  blogpostWrapper.appendChild(postContent);
 
-  postContainer.appendChild(blogpostWrapper);
+  const contentTitle = document.createElement("h1");
+  contentTitle.classList.add("title");
+  contentTitle.textContent = post.title.rendered;
+  postContent.appendChild(contentTitle);
+
+  postContent.innerHTML += post.content.rendered;
+  blogpostContent.appendChild(postContent);
+
+  postContainer.appendChild(blogpostContent);
+
+  document.title = post.title.rendered + " - Hope Down Under";
 }
 
 function openModal() {
+  const overlay = document.createElement("div");
+  overlay.classList.add("modal-bg");
+  overlay.addEventListener("click", closeModal);
+
   const modal = document.createElement("div");
   modal.classList.add("modal");
 
@@ -45,26 +56,29 @@ function openModal() {
 
   const modalClose = document.createElement("span");
   modalClose.classList.add("modal-close");
-  modalClose.textContent = "×";
+  modalClose.textContent = "✖";
   modalClose.addEventListener("click", closeModal);
 
   const modalImage = document.createElement("img");
   modalImage.classList.add("modal-image");
-  modalImage.src = post._embedded["wp:featuredmedia"][0].source_url;
-  modalImage.alt = post.title.rendered;
+  modalImage.src = currentPost._embedded["wp:featuredmedia"][0].source_url;
+  modalImage.alt = currentPost.title.rendered;
 
   modalContent.appendChild(modalClose);
   modalContent.appendChild(modalImage);
   modal.appendChild(modalContent);
+
+  document.body.appendChild(overlay);
   document.body.appendChild(modal);
 
-  modal.addEventListener("click", closeModal);
   modalContent.addEventListener("click", e => e.stopPropagation());
 }
 
 function closeModal() {
+  const overlay = document.querySelector(".modal-bg");
   const modal = document.querySelector(".modal");
-  if (modal) {
+  if (overlay && modal) {
+    overlay.remove();
     modal.remove();
   }
 }
