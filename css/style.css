@@ -400,9 +400,7 @@ nav a:hover {
     }
 }
 
-/* frontpage */
-
-/* hero */
+/* frontpage hero */
 
 .hero {
     max-width: 1280px;
@@ -555,6 +553,18 @@ nav a:hover {
     cursor: pointer;
 }
 
+@media (max-width: 768px) {
+    .item {
+        max-width: 48%;
+    }
+}
+
+@media (max-width: 480px) {
+    .item {
+        max-width: 100%;
+    }
+}
+
 /* post */
 
 .container.post {
@@ -577,7 +587,6 @@ nav a:hover {
 .post .content {
     background: #fff;
     max-width: 768px;
-    min-width: 128px;
     border-radius: 1rem;
     padding: 2rem 3rem 1.5rem 3rem;
     margin: auto;
@@ -594,7 +603,6 @@ nav a:hover {
     .post .content {
         background: #fff;
         max-width: 768px;
-        min-width: 128px;
         border-radius: 1rem;
         padding: 1.5rem 2rem .5rem 2rem;
         margin: auto;
@@ -652,7 +660,7 @@ nav a:hover {
     border-radius: .5rem;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 1200px) {
     .modal {
         width: 80%;
         padding: 1rem 1rem .5rem 1rem;
@@ -663,10 +671,9 @@ nav a:hover {
 
 .bio {
     max-width: 768px;
-    min-width: 128px;
     margin: 0 auto 4rem auto;
     background: white;
-    padding: 2rem;
+    padding: 3rem 3rem 2rem 3rem;
     border-radius: 1rem;
 }
 
@@ -688,10 +695,13 @@ nav a:hover {
 }
 
 @media (max-width: 768px) {
+    .bio {
+        padding: 2.5rem 2.5rem 1.5rem 2.5rem;
+    }
     .portrait {
         width: 100%;
         height: auto;
-        margin: 0 0 1rem 0;
+        margin: 0 0 2rem 0;
     }
     .portrait img {
         max-width: 256px;
