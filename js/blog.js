@@ -10,6 +10,8 @@ postContainer.appendChild(loadingIndicator);
 const btnContainer = document.createElement("div");
 btnContainer.classList.add("btn-container");
 
+let moreBtn;
+
 function renderPosts(posts) {
   postContainer.innerHTML = '';
 
@@ -36,20 +38,22 @@ function renderPosts(posts) {
     postContainer.appendChild(postWrapper);
   });
 
-  const moreBtn = document.createElement("button");
-  moreBtn.textContent = "Load more posts";
-  moreBtn.addEventListener("click", () => {
-    perPage += 10;
-    fetchPosts();
-    moreBtn.removeEventListener("click", loadMorePosts);
-  });
+  const prevMoreBtn = document.querySelector(".load-more-btn");
+  if (prevMoreBtn) {
+    prevMoreBtn.removeEventListener("click", loadMorePosts);
+  }
 
   const loadMorePosts = () => {
-    moreBtn.addEventListener("click", loadMorePosts);
     perPage += 10;
     fetchPosts();
   };
 
+  moreBtn = document.createElement("button");
+  moreBtn.classList.add("load-more-btn");
+  moreBtn.textContent = "Load more posts";
+  moreBtn.addEventListener("click", loadMorePosts);
+
+  btnContainer.innerHTML = '';
   btnContainer.appendChild(moreBtn);
   postContainer.appendChild(btnContainer);
 }
