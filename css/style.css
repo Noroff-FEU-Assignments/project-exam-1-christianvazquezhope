@@ -65,6 +65,10 @@ body {
     font-size: 100%;
     line-height: 1.75;
     background: #FAF2E0;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    min-height: 100vh;
 }
 
 /* font specs */
@@ -175,6 +179,7 @@ a:hover {
 }
 
 .container {
+    width: 100%;
     max-width: 1280px;
     margin-left: auto;
     margin-right: auto;
@@ -650,6 +655,7 @@ input[type="submit"]:hover {
 footer {
     width: 100%;
     min-height: 4em;
+    margin-top: auto;
     background: #024059;
     color: #fff;
 }
