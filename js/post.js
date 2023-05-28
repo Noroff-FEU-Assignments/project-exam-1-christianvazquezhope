@@ -40,6 +40,11 @@ function renderPost(post) {
 
   postContainer.appendChild(blogpostContent);
 
+  const metaDescription = document.querySelector('meta[name="description"]');
+  if (metaDescription) {
+    metaDescription.setAttribute("content", post.excerpt.rendered);
+  }
+
   document.title = post.title.rendered + " - Hope Down Under";
 }
 

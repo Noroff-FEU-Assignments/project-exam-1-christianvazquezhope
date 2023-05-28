@@ -1,7 +1,7 @@
 const api = "https://dev.digithings.io/wp-api/wp-json/wp/v2/posts";
 let perPage = 12;
 let currentPage = 1;
-const postsPerPage = 3;
+let postsPerPage = 3;
 
 const postContainer = document.querySelector(".carousel");
 const loadingIndicator = document.createElement("div");
@@ -45,7 +45,7 @@ function renderPosts(posts) {
   }
 
   const prevBtn = document.createElement("button");
-  prevBtn.textContent = "Previous";
+  prevBtn.textContent = "←";
   prevBtn.addEventListener("click", () => {
     if (currentPage > 1) {
       currentPage--;
@@ -54,7 +54,7 @@ function renderPosts(posts) {
   });
 
   const nextBtn = document.createElement("button");
-  nextBtn.textContent = "Next";
+  nextBtn.textContent = "→";
   nextBtn.addEventListener("click", () => {
     if (currentPage < totalPages) {
       currentPage++;
@@ -84,6 +84,13 @@ function fetchPosts() {
       }
     })
     .then(posts => {
+      if (window.innerWidth < 480) {
+        postsPerPage = 1;
+      } else if (window.innerWidth < 768) {
+        postsPerPage = 2;
+      } else {
+        postsPerPage = 3;
+      }
       renderPosts(posts);
     })
     .catch(error => {
